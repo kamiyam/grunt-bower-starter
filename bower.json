@@ -1,0 +1,26 @@
+{
+  "name": "grunt-bower-starter",
+  "version": "0.0.0",
+  "authors": [
+    "kamiyam"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "modernizr": "~2.7.1"
+  },
+  "exportsOverride": {
+
+    "jquery": {
+      "js": "**/jquery.min.js"
+    },
+    "modernizr": {
+      "js": "modernizr.js"
+    },
+    "bootstrap": {
+      "css": "dist/css/**/*.min.css",
+      "js": "dist/js/*.min.js",
+      "font": "dist/fonts/**/*"
+    }
+
+  }
+}

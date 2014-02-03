@@ -1,0 +1,11 @@
+# modules
+node_modules
+.bower_components
+app/vendor
+
+# development folders
+.tmp
+dist
+
+
+.idea

@@ -1,0 +1,47 @@
+/*  Main  */
+body {
+  background:#DDD;
+  color:#000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+
+#wrapper {
+  background:#FFF;
+  margin:0 auto;
+  width:960px; /*  Change to desired width :)  */
+}
+
+header {
+  font-size: 30px;
+  background-color: gray;
+  padding: 20px;
+}
+
+div#content {
+  font-size: 20px;
+  overflow: hidden;
+  zoom: 1;
+  height: 500px;
+}
+
+main {
+  width: 80%;
+  float: left;
+  padding: 30px;
+}
+
+div#side {
+  width: 20%;
+  float: left;
+  padding: 30px;
+}
+
+footer {
+  clear: both;
+  font-size: 20px;
+  background-color: gray;
+  padding: 20px;
+}
+
+
