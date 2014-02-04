@@ -21,12 +21,22 @@ module.exports = (grunt) ->
     vendorPath + path
 
   cssAssetsFilesToInject = [
-    "css/print.css"
     "css/reset.css"
-    "css/style.css"
     "**/*.css"
+    "css/style.css"
   ].map (path) ->
     assetsPath + path
+
+#    reg = /^!(.*)/ig;
+#    result = reg.exec(path)
+#    return assetsPath + path
+#
+#    if( result )
+#      console.log("!" + assetsPath + result[1])
+#      return "!" + assetsPath + result[1]
+#    else
+#      console.log(assetsPath + path)
+#      return assetsPath + path
 
   ###
   Javascript files to inject in order
