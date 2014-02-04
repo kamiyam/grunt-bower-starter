@@ -12,4 +12,5 @@ grunt
 
 ## Change log
 
+- 0.0.1 Add Watch task & Fix folder settings
 - 0.0.0 Initialize commit
