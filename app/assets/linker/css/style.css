@@ -1,6 +1,6 @@
 /*  Main  */
 body {
-  background:#DDD;
+  background: #ddd;
   color:#000;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
@@ -9,7 +9,7 @@ body {
 #wrapper {
   background:#FFF;
   margin:0 auto;
-  width:960px; /*  Change to desired width :)  */
+  width:960px;
 }
 
 header {
@@ -19,22 +19,27 @@ header {
 }
 
 div#content {
-  font-size: 20px;
+  position: relative;
+  width: 100%;
   overflow: hidden;
   zoom: 1;
-  height: 500px;
+  font-size: 20px;
 }
 
 main {
-  width: 80%;
   float: left;
-  padding: 30px;
+  width: 640px;
+  padding: 10px 30px;
+  background-color: #ccc;
+  min-height: 500px;
 }
 
 div#side {
-  width: 20%;
-  float: left;
-  padding: 30px;
+  float: right;
+  width: 240px;
+  padding: 10px;
+  background-color: #EEE;
+  min-height: 500px;
 }
 
 footer {
@@ -43,5 +48,3 @@ footer {
   background-color: gray;
   padding: 20px;
 }
-
-

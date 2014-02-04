@@ -1,8 +1,11 @@
 module.exports = (grunt) ->
 
-  appPath = "app"
-  vendorPath = appPath + "/vendor/"
-  assetsPath =  appPath + "/assets/"
+  # Listen on port 35729
+  LIVERELOAD_PORT = 35729
+
+  appPath = "app/"
+  vendorPath = appPath + "vendor/"
+  assetsPath =  appPath + "assets/linker/"
 
   server =
     hostname: "localhost"
@@ -30,7 +33,6 @@ module.exports = (grunt) ->
   (uses Grunt-style wildcard/glob/splat expressions)
   ###
   jsVendorFilesToInject = [
-    "modernizr/**/*.js"
     "jquery/**/*.js"
     "**/*.js"
   ].map (path) ->
@@ -51,21 +53,23 @@ module.exports = (grunt) ->
   ####################
   grunt.initConfig
 
-    connect:
+    # Bower Task
+    bwr: grunt.file.readJSON(".bowerrc")
+    bower:
       options:
-        port: server.port
-        hostname: server.hostname
-
+        targetDir: vendorPath
+        layout: "byComponent"
+        verbose: false
+        install: true
+        cleanTargetDir: true
+        bowerOptions: {}
+      install:
+        cleanBowerDir: false
       dev:
         options:
-          keepalive: true
-          middleware: (connect, options) ->
-            [
-              folderMount(connect, appPath)
-            ]
-          open:
-            target: "http://" + server.hostname + ":" + server.port
-          livereload: true
+#          install: false
+          cleanBowerDir: false
+      prod: {}
 
     "sails-linker":
       devVendorJs:
@@ -108,28 +112,41 @@ module.exports = (grunt) ->
         files:
           "app/**/*.html": cssAssetsFilesToInject
 
-    # Bower Task
-    bwr: grunt.file.readJSON(".bowerrc")
-    bower:
+    watch:
+      linker:
+        files: Array.prototype.concat(jsVendorFilesToInject,jsAssetsFilesToInject,cssVendorFilesToInject,cssAssetsFilesToInject)
+        tasks: ["linkDev"]
+        options:
+          livereload: false
+
+      static:
+        files: [ "!" + vendorPath, "!" + assetsPath, appPath + "**/*" ]
+        options:
+          livereload: LIVERELOAD_PORT
+
+    connect:
       options:
-        targetDir: vendorPath
-        layout: "byComponent"
-        verbose: false
-        install: true
-        cleanTargetDir: true
-        bowerOptions: {}
-      install:
-        cleanBowerDir: false
+        port: server.port
+        hostname: server.hostname
+
       dev:
         options:
-#          install: false
-          cleanBowerDir: false
-      prod: {}
+          keepalive: false
+          middleware: (connect, options) ->
+            [
+              folderMount(connect, appPath)
+            ]
+          open:
+            target: "http://" + server.hostname + ":" + server.port
+          livereload: true
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   # vendor files in use bower
   grunt.registerTask "linkDevVendor", ["sails-linker:devVendorJs", "sails-linker:devVendorStyles"]
   grunt.registerTask "linkDevAssets", ["sails-linker:devAssetsJs", "sails-linker:devAssetsStyles"]
+  grunt.registerTask "linkDev", ["linkDevVendor", "linkDevAssets"]
 
-  grunt.registerTask "default", ["bower:dev", "linkDevVendor", "linkDevAssets", "connect:dev"]
+
+  grunt.registerTask "default", ["bower:dev", "linkDev", "connect:dev", "watch"]
+

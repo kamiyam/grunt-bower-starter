@@ -1,6 +1,6 @@
 {
   "name": "grunt-bower-starter",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "grunt-bower-starter",
   "author": "kamiyam",
   "license": "MIT",
@@ -9,6 +9,7 @@
     "grunt-bower-task": "~0.3.4",
     "grunt-sails-linker": "~0.9.5",
     "matchdep": "~0.3.0",
-    "grunt-contrib-connect": "~0.6.0"
+    "grunt-contrib-connect": "~0.6.0",
+    "grunt-contrib-watch": "~0.5.3"
   }
 }
