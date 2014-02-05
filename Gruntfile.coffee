@@ -22,8 +22,8 @@ module.exports = (grunt) ->
 
   cssAssetsFilesToInject = [
     "css/reset.css"
+    "css/bandle.css"
     "**/*.css"
-    "css/style.css"
   ].map (path) ->
     assetsPath + path
 
@@ -43,13 +43,13 @@ module.exports = (grunt) ->
   (uses Grunt-style wildcard/glob/splat expressions)
   ###
   jsVendorFilesToInject = [
+    "jquery/**/jquery.min.js"
     "jquery/**/*.js"
     "**/*.js"
   ].map (path) ->
     vendorPath + path
 
   jsAssetsFilesToInject = [
-    "js/main.js"
     "**/*.js"
   ].map (path) ->
     assetsPath + path
@@ -150,13 +150,11 @@ module.exports = (grunt) ->
             target: "http://" + server.hostname + ":" + server.port
           livereload: true
 
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
 
   # vendor files in use bower
   grunt.registerTask "linkDevVendor", ["sails-linker:devVendorJs", "sails-linker:devVendorStyles"]
   grunt.registerTask "linkDevAssets", ["sails-linker:devAssetsJs", "sails-linker:devAssetsStyles"]
   grunt.registerTask "linkDev", ["linkDevVendor", "linkDevAssets"]
 
-
   grunt.registerTask "default", ["bower:dev", "linkDev", "connect:dev", "watch"]
-
